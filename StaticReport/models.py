@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import MetaData, Table, Column, ForeignKey
 
 # Create your models here.
 ##############################连接ORACLE数据库###############################
@@ -53,29 +56,48 @@ class Game(Base):
     # 此处的relation可以为lazy加载外键内容时提供一些可配置的选项
     company = relationship('GameCompany', backref=backref('games'))
 
+class Weeklyquote(models.Model):
+    secucode = models.CharField(max_length=10,primary_key=True,verbose_name=u'证券代码')
+    secuname = models.CharField(max_length=30, blank=True, null=True)
+    closedate = models.CharField(max_length=10,primary_key=True, verbose_name=u'收盘日期')
+    precloseprice = models.DecimalField(max_digits=9, decimal_places=4, blank=True, null=True)
 
-# 此处定义要使用的数据库
-db_engine=create_engine('oracle+cx_oracle://king:1@127.0.0.1:1521/XE', echo=True)
-# 调用create_all来创建表结构，已经存在的表将被忽略
-Base.metadata.create_all(db_engine)
+    openprice = models.DecimalField(max_digits=9, decimal_places=4, blank=True, null=True)
+    highprice = models.DecimalField(max_digits=9, decimal_places=4, blank=True, null=True)
+    lowprice = models.DecimalField(max_digits=9, decimal_places=4, blank=True, null=True)
+    closeprice = models.DecimalField(max_digits=9, decimal_places=4, blank=True, null=True)
+    vol = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    amount = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
+    ratio = models.DecimalField(max_digits=9, decimal_places=4, blank=True, null=True)
+    avgprice = models.DecimalField(max_digits=16, decimal_places=2, blank=True, null=True)
 
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-from sqlalchemy import MetaData, Table, Column, ForeignKey
-metadata = MetaData()
+    def __unicode__(self):
+        return u'%s %s' % (self.secucode, self.closedate)
 
-# we can reflect it ourselves from a database, using options
-# such as 'only' to limit what tables we look at...
-metadata.reflect(db_engine, only=['weeklyquote'])
-
+    class Meta:
+        managed = False
+        unique_together = ("secucode", "closedate") #这是重点
+        db_table = 'weeklyquote'
 
 
-# we can then produce a set of mappings from this MetaData.
-Base = automap_base(metadata=metadata)
-
-# calling prepare() just sets up mapped classes and relationships.
-Base.prepare()
-
-# mapped classes are ready
-weeklyquote = Base.classes.weeklyquote
-# user和address就是表名，通过这样的语句就可以把他们分别映射到User和Address类
+#####################使用automap_base 反射数据库对象#################
+#
+# # 此处定义要使用的数据库
+# db_engine=create_engine('oracle+cx_oracle://king:1@127.0.0.1:1521/XE', echo=True)
+# # 调用create_all来创建表结构，已经存在的表将被忽略
+# Base.metadata.create_all(db_engine)
+#
+# metadata = MetaData()
+# # we can reflect it ourselves from a database, using options
+# # such as 'only' to limit what tables we look at...
+# metadata.reflect(db_engine, only=['weeklyquote'])
+#
+# # we can then produce a set of mappings from this MetaData.
+# Base = automap_base(metadata=metadata)
+#
+# # calling prepare() just sets up mapped classes and relationships.
+# Base.prepare()
+# # mapped classes are ready
+# weeklyquote = Base.classes.weeklyquote
+# # user和address就是表名，通过这样的语句就可以把他们分别映射到User和Address类
+####################################################################################
