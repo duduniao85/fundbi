@@ -2,7 +2,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-#############################################define data generators start #################################3
+#############################################使用生成器作数据准备 #################################3
 
 
 series_Shares=[]
@@ -14,7 +14,8 @@ series_Trade=[]
 
 ##############################################define route view functions start################################
 
-def chart2(request):
-    context = {
-        '':series_Shares
+def ecchart(request):
+    context={
+
     }
+    return render(request,'chart_ec.html',context)

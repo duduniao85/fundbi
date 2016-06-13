@@ -1,0 +1,305 @@
+{% extends 'new_base.html' %}
+{% block ecreportlabel %}
+    <a href="/ecreport/"><b>电商报表</b> </a>
+{% endblock %}
+{% block grid %}
+<div class="ui equal width grid" style="margin:5px 0 5px 0;width:70%">
+{#  ------------------------------------------------ 电商交易量柱状图 ---------------------------------------------------  #}
+    <div class="row">
+      <div class="column">
+        <div class="ui container segment">
+          <div class="ui container" id="chart2"></div>
+        </div>
+      </div>
+    </div>
+{#  ------------------------------------------------ 展示两块小图 ---------------------------------------------------  #}
+    <div class="row">
+      <div class="column">
+        <div class="ui container segment">
+          <div class="ui container" id="pie1"></div>
+        </div>
+      </div>
+
+      <div class="column">
+          <div class="ui container segment">
+          <div class="ui container" id="pie2"></div>
+        </div>
+      </div>
+    </div>
+{#  ------------------------------------------------ CHART BLOCK ---------------------------------------------------  #}
+    <div class="row">
+      <div class="column">
+        <div class="ui container segment">
+          <div class="ui compact menu">
+            <div class="ui simple dropdown item">
+              全部基金
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                  <div class="item" id="HB">货币基金</div>
+                  <div class="item" id="GP">股票基金</div>
+                  <div class="item" id="ZQ">债券基金</div>
+                  <div class="item" id="ZS">指数基金</div>
+                  <div class="item" id="HE">混合基金</div>
+              </div>
+            </div>
+          </div>
+          <div class="ui container" id="chart1"></div>
+        </div>
+      </div>
+    </div>
+{#  ------------------------------------------------ CHART BLOCK ---------------------------------------------------  #}
+</div>
+{% endblock %}
+{#  ------------------------------------------------ SCRIPT BLOCK --------------------------------------------------  #}
+{% block chartjs %}
+    <script>
+        $('#GP').click(function () {
+          $('#chart1').highcharts({
+            credits:{
+                enabled:false
+            },
+            title: {
+                text: '朝阳二手交易'
+            },
+            yAxis: {
+                title: {
+                    text: 'TOP 3'
+                }
+            },
+            series: {{ chart_CY|safe }}
+        });
+    });
+    </script>
+{#  ------------------------------------------------ SCRIPT BLOCK --------------------------------------------------  #}
+    <script>
+        $(function () {
+          $('#chart1').highcharts({
+	        title: {
+	            text: '基金分类型月度保有量变动趋势图',
+	            x: -20 //center
+	        },
+	        subtitle: {
+	            text: '来源: 注册登记系统',
+	            x: -20
+	        },
+	        xAxis: {
+	            categories: ['Jan-1', 'Feb-1', 'Mar-1', 'Apr-1', 'May-1', 'Jun-1',
+	                'Jul-1', 'Aug-1', 'Sep-1', 'Oct-1', 'Nov-1', 'Dec-1']
+	        },
+	        yAxis: {
+	            title: {
+	                text: '保有量（百万）'
+	            },
+	            plotLines: [{
+	                value: 0,
+	                width: 1,
+	                color: '#808080'
+	            }]
+	        },
+	        tooltip: {
+	            valueSuffix: ' 百万元'
+	        },
+	        legend: {
+	            layout: 'vertical',
+	            align: 'right',
+	            verticalAlign: 'middle',
+	            borderWidth: 0
+	        },
+	        series: [{
+	            name: '股票型',
+	            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+	        }, {
+	            name: '货币型',
+	            data: [10.2, 10.8, 15.7, 111.3, 117.0, 122.0, 124.8, 124.1, 120.1, 114.1, 118.6, 112.5]
+	        }, {
+	            name: '债券型',
+	            data: [0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+	        },{
+	            name: '指数型',
+	            data: [0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+	        }, {
+	            name: '混合型',
+	            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+	        }]
+	    });
+    });
+	</script>
+{#  ------------------------------------------------ SCRIPT BLOCK --------------------------------------------------  #}
+    <script>
+        $('#TZ').click(function () {
+          $('#chart1').highcharts({
+            credits:{
+                enabled:false
+            },
+            title: {
+                text: '通州二手交易'
+            },
+            yAxis: {
+                title: {
+                    text:  'TOP 3'
+                }
+            },
+            series: {{ chart_HD|safe }}
+        });
+    });
+    </script>
+{#  ------------------------------------------------ 柱状图 --------------------------------------------------  #}
+    <script>
+    $(function () {
+        // Create the chart
+        $('#chart2').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '电商月度交易量柱状图'
+            },
+            subtitle: {
+                text: '来源: 注册登记系统'
+            },
+            xAxis: {
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '交易量 (万元)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} 万元</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: '钱滚滚',
+                data: [490.9, 710.5, 1060.4, 1290.2, 1440.0, 1760.0, 1350.6, 1480.5, 2160.4, 1940.1, 950.6, 540.4]
+
+            }, {
+                name: '第三方平台',
+                data: [830.6, 780.8, 980.5, 930.4, 1060.0, 840.5, 1050.0, 1040.3, 910.2, 830.5, 1060.6, 920.3]
+
+            }]
+        });
+    });
+
+    </script>
+{#  ------------------------------------------------ SCRIPT BLOCK --------------------------------------------------  #}
+    <script>
+    $(function () {
+        $('#pie1').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: '电商平台保有量分布占比图'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '保有量占比',
+                data: [
+                    {
+                        name: '钱滚滚',
+                        y: 45,
+                        sliced: true,
+                        selected: true
+                    },
+                    ['天天基金网',       26.8],
+                    {
+                        name: '好买网',
+                        y: 12.8,
+                        sliced: false,
+                        selected: false
+                    },
+                    ['数米网',    8.5],
+                    ['陆金所',     6.2],
+                    ['其它',   0.7]
+                ]
+            }]
+        });
+    });
+    </script>
+{#  ------------------------------------------------ SCRIPT BLOCK --------------------------------------------------  #}
+    <script>
+    $(function () {
+        $('#pie2').highcharts({
+            chart: {
+                type: 'funnel',
+                marginRight: 100
+            },
+            title: {
+                text: '钱滚滚用户转化漏斗',
+                x: -50
+            },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b> ({point.y:,.0f})',
+                        color: 'black',
+                        softConnector: true
+                    },
+                    neckWidth: '30%',
+                    neckHeight: '25%'
+
+                    //-- Other available options
+                    // height: pixels or percent
+                    // width: pixels or percent
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            series: [{
+                name: 'Unique users',
+                data: [
+                    ['网站访问',   15654],
+                    ['注册',       4064],
+                    ['登录', 1987],
+                    ['绑卡',    976],
+                    ['交易',    846]
+                ]
+            }]
+        });
+    });
+    </script>
+{% endblock %}

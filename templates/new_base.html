@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>
-      Do not put label here!
+      中欧报表平台
     </title>
     <link rel="stylesheet" href="{% static 'css/semantic.css' %}">
     <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -12,6 +12,7 @@
     <script src="{% static 'js/exporting.js' %}"></script>
     <script src="{% static 'js/highcharts.js' %}"></script>
     <script src="{% static 'js/highcharts-more.js' %}"></script>
+    <script src="{% static 'js/funnel.js' %}"></script>
 
   </head>
 
@@ -21,15 +22,15 @@
         <img src="{% static 'images/logo2.png' %}">
       </div>
       <div class="item">
-        Doucument
+        报表
         <i class="browser icon"></i>
       </div>
       <div class="item">
-        Charts
+        渠道管理
         <i class="bar chart icon"></i>
       </div>
       <div class="item">
-        Others
+        编辑数据
         <i class="idea icon"></i>
       </div>
     </div>
@@ -37,17 +38,23 @@
     <div class="pusher">
       <div class="ui menu">
         <div class="header item" id="menu">
-          Menu
+          菜单栏
           <i class="content icon"></i>
         </div>
         <div class="item">
-          About us
+          {% block ecreportlabel %}
+          <a href="/ecreport/">电商报表</a>
+          {% endblock %}
         </div>
         <div class="item">
-          Location
+          {% block orgcustreport %}
+          <a href="#">渠道报表</a>
+          {% endblock %}
         </div>
         <div class="item">
-          Others
+          {% block channelreport %}
+          <a href="#">机构报表</a>
+          {% endblock %}
         </div>
       </div>
 

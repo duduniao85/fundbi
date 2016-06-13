@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'fundbi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'XE',
-        'USER': 'king',
-        'PASSWORD': '1',
-        'HOST':'127.0.0.1',
-        'PORT':'1521',
+        'NAME': 'xedm',
+        'USER': 'xedm_sale',
+        'PASSWORD': 'xpar',
+        'HOST':'172.16.11.182',
+        'PORT':'1821',
     }
 }
 
