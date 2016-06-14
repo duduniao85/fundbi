@@ -1,0 +1,47 @@
+{% extends 'new_base.html' %}
+{% block ecreportlabel %}
+    {#------突出展示目前选中的报表---------#}
+    <a href="/ecreport/"><b>电商报表</b> </a>
+{% endblock %}
+{#  ------------------------------------------------ 自定义二级菜单 ---------------------------------------------------  #}
+{% block secondmenuitem %}
+    <a class="item" href="/ecreport/">汇总报表</a>
+    <a class="item active" href="/ecreport_trade/">交易量报表</a>
+    <a class="item">保有量报表</a>
+    <a class="item">客户数分析报表</a>
+{% endblock %}
+{% block content-grid %}
+
+{#  ------------------------------------------------ 电商交易量统计表 ---------------------------------------------------  #}
+    <div class="row">
+      <div class="column">
+        <table class="ui celled table">
+          <thead>
+            <tr><th>产品名称</th>
+            <th>交易用户数</th>
+            <th>净流入(万)</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>中欧瑾泉A</td>
+              <td>10045</td>
+              <td>1343125</td>
+            </tr>
+            <tr>
+              <td>中欧琪和C</td>
+              <td>1234</td>
+              <td>341432</td>
+            </tr>
+            <tr>
+              <td>中欧瑾和A</td>
+              <td>321</td>
+              <td>34132</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+{% endblock %}
+{#  ------------------------------------------------ SCRIPT BLOCK --------------------------------------------------  #}
+{% block chartjs %}
+{% endblock %}

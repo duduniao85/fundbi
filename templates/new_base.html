@@ -17,9 +17,9 @@
   </head>
 
   <body>
-    <div class="ui thin visible left sidebar inverted vertical menu">
+    <div class="ui thin visible left sidebar inverted vertical menu" style="background-color:#1274B9">
       <div class="header item">
-        <img src="{% static 'images/logo2.png' %}">
+        <img src="{% static 'images/logo_clear.png' %}">
       </div>
       <div class="item">
         报表
@@ -58,7 +58,22 @@
         </div>
       </div>
 
-      {% block grid %}{% endblock %}
+      <div class="ui equal width grid" style="margin:5px 0 5px 0;width:85%">
+        <div class="ui secondary menu" >
+          {% block secondmenuitem %}
+          <a class="item active">Link</a>
+          <a class="item">Link</a>
+          <a class="item">Link</a>
+          {% endblock %}
+        </div>
+
+        {% block content-grid %}{% endblock %}
+      </div>
+
+
+
+
+
     </div>
     <script>
     $('#menu').click(function () {

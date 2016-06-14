@@ -1,9 +1,17 @@
 {% extends 'new_base.html' %}
 {% block ecreportlabel %}
+    {#------突出展示目前选中的报表---------#}
     <a href="/ecreport/"><b>电商报表</b> </a>
 {% endblock %}
-{% block grid %}
-<div class="ui equal width grid" style="margin:5px 0 5px 0;width:70%">
+{#  ------------------------------------------------ 自定义二级菜单 ---------------------------------------------------  #}
+{% block secondmenuitem %}
+    <a class="item active" href="/ecreport/">汇总报表</a>
+    <a class="item" href="/ecreport_trade/">交易量报表</a>
+    <a class="item">保有量报表</a>
+    <a class="item">客户数分析报表</a>
+{% endblock %}
+{% block content-grid %}
+
 {#  ------------------------------------------------ 电商交易量柱状图 ---------------------------------------------------  #}
     <div class="row">
       <div class="column">
@@ -48,7 +56,6 @@
       </div>
     </div>
 {#  ------------------------------------------------ CHART BLOCK ---------------------------------------------------  #}
-</div>
 {% endblock %}
 {#  ------------------------------------------------ SCRIPT BLOCK --------------------------------------------------  #}
 {% block chartjs %}

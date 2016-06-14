@@ -19,3 +19,9 @@ def ecchart(request):
 
     }
     return render(request,'chart_ec.html',context)
+
+def ecchart_trade(request):
+    context={
+
+    }
+    return render(request,'chart_ec_trade.html',context)
