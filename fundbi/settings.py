@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for fundbi project.
 
@@ -27,28 +28,30 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+LOGIN_URL='/login/'
 # Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions',#会话管理应用 如果不需要可以删除
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_pdb',
     'StaticReport',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',  #会话管理中间件，如果不需要可以删除
+    'django.middleware.common.CommonMiddleware', #
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django_pdb.middleware.PdbMiddleware',
 )
 
 ROOT_URLCONF = 'fundbi.urls'
@@ -90,9 +93,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -107,3 +110,23 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)# in order to find the staticfiles
 
+#LDAP configuration
+# import ldap
+# from django_auth_ldap.config import LDAPSearch
+AUTHENTICATION_BACKENDS = (
+    #'django_auth_ldap.backend.LDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+ )
+# AUTH_LDAP_CONNECTION_OPTIONS = {
+#   ldap.OPT_REFERRALS: 0
+# }
+
+# AUTH_LDAP_ALWAYS_UPDATE_USER = True
+# AUTH_LDAP_SERVER_URI = 'ldap://172.16.11.10:389'
+# AUTH_LDAP_BIND_DN = u'CN=lcadmin,OU=组织架构,DC=lombardachina,DC=com'
+# AUTH_LDAP_BIND_PASSWORD = "us,123"
+# AUTH_LDAP_USER_SEARCH = LDAPSearch(u"OU=组织架构, DC=lombardachina,DC=com",ldap.SCOPE_SUBTREE, "(&(objectClass=person)(sAMAccountName=%(user)s))")
+# AUTH_LDAP_USER_ATTR_MAP = {
+#     "username": "sAMAccountName",
+#     "email": "mail"
+# }

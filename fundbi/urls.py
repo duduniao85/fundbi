@@ -11,4 +11,5 @@ urlpatterns = [
     #url(r'^chart/', include(admin.site.urls)),
     url(r'^ecreport/', ecchart),#电商汇总报表
     url(r'^ecreport_trade/', ecchart_trade),#交易量报表
+    url(r'^login/',login),
 ]

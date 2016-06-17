@@ -15,11 +15,11 @@
 {#  ------------------------------------------------ 电商交易量统计表 ---------------------------------------------------  #}
     <div class="row">
       <div class="column">
-        <table class="ui celled table">
+        <table class="ui sortable celled table" id="tradestat">
           <thead>
             <tr><th>产品名称</th>
-            <th>交易用户数</th>
-            <th>净流入(万)</th>
+            <th class="sorted descending">交易用户数</th>
+            <th class="sorted descending">净流入(万)</th>
           </tr></thead>
           <tbody>
             <tr>
@@ -44,4 +44,8 @@
 {% endblock %}
 {#  ------------------------------------------------ SCRIPT BLOCK --------------------------------------------------  #}
 {% block chartjs %}
+<script>
+{#  ---------支持可排序的表----------  #}
+$('table').tablesort();
+</script>
 {% endblock %}
