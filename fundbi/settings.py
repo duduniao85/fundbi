@@ -35,7 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',#会话管理应用 如果不需要可以删除
+    'django.contrib.sessions',#浼氳瘽绠＄悊搴旂敤 濡傛灉涓嶉渶瑕佸彲浠ュ垹闄�
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_pdb',
@@ -43,7 +43,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',  #会话管理中间件，如果不需要可以删除
+    'django.contrib.sessions.middleware.SessionMiddleware',  #浼氳瘽绠＄悊涓棿浠讹紝濡傛灉涓嶉渶瑕佸彲浠ュ垹闄�
     'django.middleware.common.CommonMiddleware', #
     #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -54,7 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django_pdb.middleware.PdbMiddleware',
 )
 
-ROOT_URLCONF = 'fundbi.urls'
+ROOT_URLCONF = 'fundbi.urls'#用来确定URL参数的配置文件
 
 TEMPLATES = [
     {
@@ -84,8 +84,8 @@ DATABASES = {
         'NAME': 'xedm',
         'USER': 'xedm_sale',
         'PASSWORD': 'xpar',
-        'HOST':'172.16.11.182',
-        'PORT':'1821',
+        'HOST':'127.0.0.1',
+        'PORT':'1521',
     }
 }
 
@@ -123,9 +123,9 @@ AUTHENTICATION_BACKENDS = (
 
 # AUTH_LDAP_ALWAYS_UPDATE_USER = True
 # AUTH_LDAP_SERVER_URI = 'ldap://172.16.11.10:389'
-# AUTH_LDAP_BIND_DN = u'CN=lcadmin,OU=组织架构,DC=lombardachina,DC=com'
+# AUTH_LDAP_BIND_DN = u'CN=lcadmin,OU=缁勭粐鏋舵瀯,DC=lombardachina,DC=com'
 # AUTH_LDAP_BIND_PASSWORD = "us,123"
-# AUTH_LDAP_USER_SEARCH = LDAPSearch(u"OU=组织架构, DC=lombardachina,DC=com",ldap.SCOPE_SUBTREE, "(&(objectClass=person)(sAMAccountName=%(user)s))")
+# AUTH_LDAP_USER_SEARCH = LDAPSearch(u"OU=缁勭粐鏋舵瀯, DC=lombardachina,DC=com",ldap.SCOPE_SUBTREE, "(&(objectClass=person)(sAMAccountName=%(user)s))")
 # AUTH_LDAP_USER_ATTR_MAP = {
 #     "username": "sAMAccountName",
 #     "email": "mail"
